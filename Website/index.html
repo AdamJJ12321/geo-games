@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mystery Country</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="game-shell">
+    <section class="map-stage" aria-label="Mystery country map game">
+      <header class="top-bar">
+        <div>
+          <p class="eyebrow">Mystery country</p>
+          <h1>Find the hidden country</h1>
+        </div>
+        <button class="icon-button" id="new-game" type="button" title="New mystery country" aria-label="New mystery country">New</button>
+      </header>
+
+      <div class="map-wrap">
+        <svg class="world-map" id="world-map" viewBox="0 40 1060 660" role="img" aria-label="World map without country borders"></svg>
+        <div class="guess-callout" id="guess-callout" aria-live="polite"></div>
+      </div>
+
+      <div class="legend" aria-label="Distance color legend">
+        <span><i style="background:#fff8c9"></i>Very very far</span>
+        <span><i style="background:#f7df75"></i>Very far</span>
+        <span><i style="background:#f2ae40"></i>Far</span>
+        <span><i style="background:#e87831"></i>Medium</span>
+        <span><i style="background:#dc4b30"></i>Pretty close</span>
+        <span><i style="background:#c91f2e"></i>Close</span>
+        <span><i style="background:#8f1228"></i>Very close</span>
+        <span><i style="background:#5d1d2b"></i>Adjacent</span>
+        <span><i style="background:#28a85a"></i>Correct</span>
+      </div>
+    </section>
+
+    <section class="guess-dock" aria-label="Country guesses">
+      <form class="guess-form" id="guess-form">
+        <label class="sr-only" for="country-input">Guess a country</label>
+        <input id="country-input" list="country-options" autocomplete="off" placeholder="Guess a country" />
+        <datalist id="country-options"></datalist>
+        <button type="submit">Guess</button>
+      </form>
+      <p class="status-line" id="status-line">A mystery country is ready.</p>
+      <ol class="guess-history" id="guess-history"></ol>
+    </section>
+  </main>
+
+  <script src="countries-data.js?v=3"></script>
+  <script src="app.js?v=3"></script>
+</body>
+</html>
