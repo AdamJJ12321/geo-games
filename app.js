@@ -11,13 +11,15 @@ const els = {
   status: document.querySelector("#status-line"),
   history: document.querySelector("#guess-history"),
   callout: document.querySelector("#guess-callout"),
+  giveUp: document.querySelector("#give-up"),
   fresh: document.querySelector("#new-game")
 };
 
 const state = {
   mystery: null,
   guesses: [],
-  distanceCache: new Map()
+  distanceCache: new Map(),
+  calloutTimer: null
 };
 
 const countries = features
@@ -224,6 +226,8 @@ function startGame() {
   els.status.textContent = "A mystery country is ready.";
   els.callout.textContent = "";
   els.callout.classList.remove("show", "correct");
+  window.clearTimeout(state.calloutTimer);
+  els.giveUp.disabled = false;
   els.input.disabled = false;
   els.input.value = "";
   resetCountryStyles();
@@ -258,7 +262,10 @@ function submitGuess(event) {
     : `${assumedText}Keep narrowing it down.`;
   els.input.value = "";
 
-  if (guess.id === answer.id) els.input.disabled = true;
+  if (guess.id === answer.id) {
+    els.input.disabled = true;
+    els.giveUp.disabled = true;
+  }
 }
 
 function renderGuessHistory() {
@@ -273,6 +280,7 @@ function renderGuessHistory() {
 }
 
 function showGuessCallout(guess, answer, distance) {
+  window.clearTimeout(state.calloutTimer);
   els.callout.classList.remove("show", "correct");
   if (guess.id === answer.id) {
     els.callout.textContent = `${guess.name} is the mystery country`;
@@ -283,6 +291,25 @@ function showGuessCallout(guess, answer, distance) {
     els.callout.textContent = `${guess.name} is ${formatDistance(distance)} away`;
   }
   window.requestAnimationFrame(() => els.callout.classList.add("show"));
+  state.calloutTimer = window.setTimeout(() => {
+    els.callout.classList.remove("show");
+  }, 1500);
+}
+
+function giveUp() {
+  const answer = state.mystery;
+  if (!answer || els.input.disabled) return;
+  window.clearTimeout(state.calloutTimer);
+  setCountryColor(answer.id, distanceColor(answer, answer, 0), true);
+  els.callout.textContent = `The answer was ${answer.name}`;
+  els.callout.classList.add("correct", "show");
+  state.calloutTimer = window.setTimeout(() => {
+    els.callout.classList.remove("show");
+  }, 1500);
+  els.status.textContent = `The mystery country was ${answer.name}.`;
+  els.input.value = "";
+  els.input.disabled = true;
+  els.giveUp.disabled = true;
 }
 
 function resetCountryStyles() {
@@ -310,15 +337,15 @@ function distanceLabel(distance) {
 }
 
 function distanceColor(guess, answer, distance) {
-  if (guess.id === answer.id) return "#28a85a";
-  if (distance === 0) return "#5d1d2b";
-  if (distance <= 250) return "#8f1228";
-  if (distance <= 750) return "#c91f2e";
-  if (distance <= 1500) return "#dc4b30";
-  if (distance <= 3000) return "#e87831";
-  if (distance <= 5000) return "#f2ae40";
-  if (distance <= 8000) return "#f7df75";
-  return "#fff8c9";
+  if (guess.id === answer.id) return "#58714e";
+  if (distance === 0) return "#4b2830";
+  if (distance <= 250) return "#672b3c";
+  if (distance <= 750) return "#893441";
+  if (distance <= 1500) return "#9e4c3d";
+  if (distance <= 3000) return "#ad673d";
+  if (distance <= 5000) return "#bf9344";
+  if (distance <= 8000) return "#d8c26b";
+  return "#efe6bf";
 }
 
 function borderDistanceKm(a, b) {
@@ -390,6 +417,7 @@ function toRad(degrees) {
 }
 
 els.form.addEventListener("submit", submitGuess);
+els.giveUp.addEventListener("click", giveUp);
 els.fresh.addEventListener("click", startGame);
 
 renderMap();

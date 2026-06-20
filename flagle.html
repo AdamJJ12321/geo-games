@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Flag Traces</title>
+  <link rel="stylesheet" href="styles.css?v=7" />
+</head>
+<body>
+  <main class="game-shell flag-shell">
+    <section class="map-stage flag-stage" aria-label="Flag guessing game">
+      <header class="top-bar">
+        <div>
+          <p class="eyebrow">Flag traces</p>
+          <h1>Find the hidden flag</h1>
+        </div>
+        <div class="top-actions">
+          <a class="icon-button quiet-button" href="index.html">Home</a>
+          <button class="icon-button" id="new-game" type="button">New</button>
+        </div>
+      </header>
+
+      <div class="flag-board">
+        <canvas class="flag-canvas" id="flag-canvas" width="300" height="200" role="img" aria-label="Hidden flag pixel reveal"></canvas>
+      </div>
+
+      <div class="flag-clues" id="flag-clues" aria-label="Revealed pixels"></div>
+    </section>
+
+    <section class="guess-dock" aria-label="Flag guesses">
+      <form class="guess-form" id="guess-form">
+        <label class="sr-only" for="country-input">Guess a flag country</label>
+        <input id="country-input" list="country-options" autocomplete="off" placeholder="Guess a country flag" />
+        <datalist id="country-options"></datalist>
+        <button type="submit">Guess</button>
+      </form>
+      <p class="status-line" id="status-line">Three tries. Matching pixels reveal the hidden flag.</p>
+      <ol class="guess-history flag-history" id="guess-history"></ol>
+    </section>
+  </main>
+
+  <script src="countries-data.js?v=4"></script>
+  <script src="flagle.js?v=5"></script>
+</body>
+</html>

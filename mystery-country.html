@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Mystery Country</title>
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="styles.css?v=7" />
 </head>
 <body>
   <main class="game-shell">
@@ -14,7 +14,11 @@
           <p class="eyebrow">Mystery country</p>
           <h1>Find the hidden country</h1>
         </div>
-        <button class="icon-button" id="new-game" type="button" title="New mystery country" aria-label="New mystery country">New</button>
+        <div class="top-actions">
+          <a class="icon-button quiet-button" href="index.html">Home</a>
+          <button class="icon-button quiet-button" id="give-up" type="button">I give up</button>
+          <button class="icon-button" id="new-game" type="button" title="New mystery country" aria-label="New mystery country">New</button>
+        </div>
       </header>
 
       <div class="map-wrap">
@@ -23,15 +27,15 @@
       </div>
 
       <div class="legend" aria-label="Distance color legend">
-        <span><i style="background:#fff8c9"></i>Very very far</span>
-        <span><i style="background:#f7df75"></i>Very far</span>
-        <span><i style="background:#f2ae40"></i>Far</span>
-        <span><i style="background:#e87831"></i>Medium</span>
-        <span><i style="background:#dc4b30"></i>Pretty close</span>
-        <span><i style="background:#c91f2e"></i>Close</span>
-        <span><i style="background:#8f1228"></i>Very close</span>
-        <span><i style="background:#5d1d2b"></i>Adjacent</span>
-        <span><i style="background:#28a85a"></i>Correct</span>
+        <span><i style="background:#efe6bf"></i>Very very far</span>
+        <span><i style="background:#d8c26b"></i>Very far</span>
+        <span><i style="background:#bf9344"></i>Far</span>
+        <span><i style="background:#ad673d"></i>Medium</span>
+        <span><i style="background:#9e4c3d"></i>Pretty close</span>
+        <span><i style="background:#893441"></i>Close</span>
+        <span><i style="background:#672b3c"></i>Very close</span>
+        <span><i style="background:#4b2830"></i>Adjacent</span>
+        <span><i style="background:#58714e"></i>Correct</span>
       </div>
     </section>
 
@@ -47,7 +51,7 @@
     </section>
   </main>
 
-  <script src="countries-data.js?v=3"></script>
-  <script src="app.js?v=3"></script>
+  <script src="countries-data.js?v=4"></script>
+  <script src="app.js?v=5"></script>
 </body>
 </html>
